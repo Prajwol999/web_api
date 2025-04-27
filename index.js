@@ -94,6 +94,63 @@ app.listen(
 
 // multiple type of request as :GET,POST,PUT,PATCH,DELETE.....
 
+// route blogs
+// get blogs
+// create blogs
+// edit blogs
+// delete blogs
+
+const blogs = [
+    {id:1,name:"Nikesh",title:"Trip to pokhara",desc:"desc"},
+    {id:2,name:"Aman",title:"Trip to heaven",desc:"desc"},
+    {id:2,name:"Shubham",title:"Trip to india",desc:"desc"}
+    
+]
+
+// local db/blogs
+app.get("/blogs/",(req,res)=>{
+    return res.status(200).json(
+        {
+            "success":true,
+            "blogs":blogs
+
+        }
+    )
+    }
+)
+
+// single blog
+
+app.get("/blogs/:blogId",(req,res)=>{
+    let blogId = req.params.blogId
+
+    // search
+
+    for(blog of blogs){
+        if(blogId==blog.id){
+            search = blog
+            break
+        }
+    }
+    if(search){
+        return res.status(200).json(
+            {
+                "success":true,
+                "blog":search
+            }
+        )
+    }else{
+        return res.status(404).json(
+            {
+                "success":true,
+                "message":"blog not"
+            }
+        )
+    }
+})
+
+
+
 
 
 
