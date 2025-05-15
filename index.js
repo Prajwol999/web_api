@@ -1,7 +1,10 @@
 
 const express = require("express")
 
+ //accept json in request
+
 const app = express()
+app.use(express.json())
 
 app.get("/",(req,res)=>{
     return res.status(200).send("Hello world!!")
@@ -100,7 +103,7 @@ app.listen(
 // edit blogs
 // delete blogs
 
-const blogs = [
+let  blogs = [
     {id:1,name:"Nikesh",title:"Trip to pokhara",desc:"desc"},
     {id:2,name:"Aman",title:"Trip to heaven",desc:"desc"},
     {id:2,name:"Shubham",title:"Trip to india",desc:"desc"}
@@ -125,7 +128,7 @@ app.get("/blogs/:blogId",(req,res)=>{
     let blogId = req.params.blogId
 
     // search
-
+  let search 
     for(blog of blogs){
         if(blogId==blog.id){
             search = blog
@@ -148,6 +151,77 @@ app.get("/blogs/:blogId",(req,res)=>{
         )
     }
 })
+
+// data add/add to blogs
+app.post("/blogs/",(req,res)=>{
+
+    console.log("Body",req.body) //all request
+    const{id,name,title,desc} = req.body
+
+// validation
+if(!id || !name || !title || ! desc){
+    return res.status(404).json(
+        {
+            "success":true,
+            "message":"validation done "
+        }
+    )
+}
+    blogs.push(
+        {
+            id,
+            name,
+            title,
+            desc
+        }
+    )
+    return res.status(200).json({
+        "success":true,
+        "message":"blog added"
+    })
+
+
+
+
+})
+
+// update put/patch -> data update
+// put -> complete change
+// patch -> partial change
+
+app.put("/blogs/:blogId",(req,res)=>{
+    let blogId = req.params.blogId
+    let foundIdx
+    for(blogIdx in blogs){
+        if(blogId[blogIdx]==blogId){
+            foundIdx = blogIdx
+            break
+        }
+    }
+    const{name,title,desc} = req.body
+    blogs[foundIdx].name = name
+    blogs[foundIdx].title = title
+    blogs[foundIdx].desc = desc
+    return res.status(200).json(
+        {
+            "success":true,
+            "message":"Blog updated"
+        }
+    )
+})
+
+// delete
+app.delete("/blogs/:blogId", (req, res) => {
+    let blogId = req.params.blogId;
+    blogs = blogs.filter((blog) => blog.id != blogId);
+    return res.status(200).json({
+        success: true,
+        message: "Blog deleted"
+    });
+});
+
+
+
 
 
 
