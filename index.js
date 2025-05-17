@@ -1,10 +1,20 @@
 
 const express = require("express")
+const connectDB = require("./config/db")
+const userRoutes = require("./routes/userRoutes")
+const studentRoutes = require("./routes/studentRoutes")
+
+
 
  //accept json in request
 
 const app = express()
+connectDB()
 app.use(express.json())
+
+// implement routes here
+app.use("/api/auth",userRoutes)
+app.use('/api/v1/students', studentRoutes);
 
 app.get("/",(req,res)=>{
     return res.status(200).send("Hello world!!")
@@ -43,6 +53,17 @@ app.listen(
         console.log("server started")
     }
 )
+
+// create a model student
+// studid:unique,required
+// stu_name
+// stu_email - unique,required
+
+// create controller for student
+// create 2 api
+// createStudent - check/validate also if empty or not
+// getAll user Model.find()
+//  create route and use it "/api/v1/students"
 
 
 // app.get("/post/:id",(req,res)=>{
