@@ -1,22 +1,20 @@
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
-    stuId: {
+    studid: {
         type: Number,
         required: true,
         unique: true
     },
-    stuName: {
+    stu_name: {
         type: String,
         required: true
     },
-    stuEmail: {
+    stu_email: {
         type: String,
         required: true,
         unique: true
     }
 });
 
-const Student = mongoose.model('Student', studentSchema);
-
-module.exports = Student;
+module.exports = mongoose.model('Student', studentSchema);
