@@ -1,6 +1,6 @@
 // CRUD 
 
-const User = require("./../models/User")
+const User = require("../../models/User")
 const bcrypt = require("bcrypt")
 
 // create
@@ -44,6 +44,7 @@ exports.createUser = async(req,res)=>{
         )
 
     }
+}
 
     // read all
 
@@ -64,5 +65,73 @@ exports.createUser = async(req,res)=>{
             })
         }
     }
+    exports.getOneUser = async(req,res)=>{
+        try{
+            const _id = req.params._id
+            const user = user.findById(id)
+            return res.status(200).json(
+                {
+                    "success":true,
+                    "message":"one user fetched",
+                    "data":user
+                }
+            )
+        }catch(err){
+            return res.status(500).json({
+                "success":false,"message":"server Error"
+            })
+        }
+    }
+    // update 
+    exports.updateOneUser = async(req,res)=>{
+        const{firstName,lastName} = req.body
+        const _id = req.params.id
+        try{
+            const user = User.updateOne(
+                {
+                    "_id":_id
+                },
+                {
+                    $set:{
+                        "firstName":firstName,
+                        "lastName":lastName
+                    }
+                }
 
-}
+            )
+            return res.status(200).json(
+                {
+                    "success":true,"message":"user data updated"
+                }
+            )
+
+        }catch(err){
+
+            return res.status(500).json({
+                "success":false,"message":"server error"
+            })
+
+        }
+    }
+
+    // delete
+
+    exports.deleteOneUser = async(req,res) =>{
+        try{
+            const _id = req.params.id
+            const user = await user.deleteOne(
+                {
+                    "_id":"_id"
+                }
+            )
+            return res.status(200).json(
+                {"success":true,"message":"user deleted"}
+            )
+        }
+        catch(err){
+            return res.status(500).json({
+                "success":true,"message":"server error"
+            })
+        }
+    }
+

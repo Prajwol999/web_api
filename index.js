@@ -4,6 +4,9 @@ const express = require("express")
 const connectDB = require("./config/db")
 const userRoutes = require("./routes/userRoutes")
 const studentRoutes = require("./routes/studentRoutes")
+const adminUserRoutes = require("./routes/admin/adminUserRoute")
+
+
 
 
 
@@ -16,6 +19,7 @@ app.use(express.json())
 // implement routes here
 app.use("/api/auth",userRoutes)
 app.use('/api/v1/students', studentRoutes);
+app.use("/api/admin/user",adminUserRoutes)
 
 app.get("/",(req,res)=>{
     return res.status(200).send("Hello world!!")
