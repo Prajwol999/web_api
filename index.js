@@ -1,3 +1,4 @@
+require('dotenv').config() // for .env file
 
 const express = require("express")
 const connectDB = require("./config/db")
@@ -46,6 +47,8 @@ app.get("/users/:id",(req,res)=>{
     }
 }
 )
+
+const PORT = process.env.PORT
 
 app.listen(
     8080,

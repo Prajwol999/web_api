@@ -1,10 +1,10 @@
 const Student = require('../models/Student');
 
-// Create a new student
+
 const createStudent = async (req, res) => {
     const { studid, stu_name, stu_email } = req.body;
 
-    // Validate required fields
+    
     if (!studid || !stu_name || !stu_email) {
         return res.status(400).json({ error: 'All fields are required' });
     }
@@ -18,7 +18,7 @@ const createStudent = async (req, res) => {
     }
 };
 
-// Get all students
+
 const getAllStudents = async (req, res) => {
     try {
         const students = await Student.find();
