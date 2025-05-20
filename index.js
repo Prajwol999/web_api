@@ -17,7 +17,7 @@ connectDB()
 app.use(express.json())
 
 // implement routes here
-app.use("/api/auth",userRoutes)
+app.use("/api/auth/",userRoutes)
 app.use('/api/v1/students', studentRoutes);
 app.use("/api/admin/user",adminUserRoutes)
 
@@ -247,6 +247,14 @@ app.delete("/blogs/:blogId", (req, res) => {
         message: "Blog deleted"
     });
 });
+
+
+// task create a new middle ware isStudent
+// check if user role is student or admin
+// create two user,one normal,one student
+// apply the middlewares in all the get routes od studentRoute
+
+
 
 
 
