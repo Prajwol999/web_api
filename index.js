@@ -8,6 +8,18 @@ const adminUserRoutes = require("./routes/admin/adminUserRoute")
 const adminCategoryRoutes = require("./routes/admin/adminCategoryRoute")
 const adminProductRoutes = require("./routes/admin/productRoute")
 
+const path = require("path")
+const app = express()
+
+
+const cors = require("cors")
+let corsOptions = {
+
+    origin:"*"
+
+}
+app.use(cors(corsOptions))
+
 
 
 
@@ -15,7 +27,6 @@ const adminProductRoutes = require("./routes/admin/productRoute")
 
  //accept json in request
 
-const app = express()
 connectDB()
 app.use(express.json())
 
