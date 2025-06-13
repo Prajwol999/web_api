@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 const CONNECTION_STRING = process.env.MONGODB_URI
 
 const connectDB = async()=>{
@@ -11,8 +12,8 @@ const connectDB = async()=>{
             }
         )
         console.log("Mongodb connected")
-    }catch{
-        console.log("DB error",err)
+    }catch(error){
+        console.error(error.message)
     }
     
 }

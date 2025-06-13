@@ -31,7 +31,7 @@ exports.registerUser = async(req,res)=>{
         return res.status(500).json(
             {
                 "success":false,
-                "message":"server error"
+                "message":e.message
 
             }
         )
