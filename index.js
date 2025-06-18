@@ -270,9 +270,7 @@ app.delete("/blogs/:blogId", (req, res) => {
 // create two user,one normal,one student
 // apply the middlewares in all the get routes od studentRoute
 
-
-
-
+module.exports = app
 
 
 
